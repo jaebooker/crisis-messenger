@@ -80,8 +80,10 @@ app.post("/webhook", (req, res) => {
       if ("changes" in entry) {
         // Handle Page Changes event
         let receiveMessage = new Receive();
+        console.log(receiveMessage);
         if (entry.changes[0].field === "feed") {
           let change = entry.changes[0].value;
+          console.log(change)
           switch (change.item) {
             case "post":
               return receiveMessage.handlePrivateReply(

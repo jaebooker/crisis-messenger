@@ -38,7 +38,18 @@ module.exports = class Receive {
         if (message.quick_reply) {
           responses = this.handleQuickReply();
         } else if (message.attachments) {
-          responses = this.handleAttachmentMessage();
+        var lat = null;
+        var long = null;
+        if(messageAttachments[0].payload.coordinates)
+        {
+            lat = messageAttachments[0].payload.coordinates.lat;
+            long = messageAttachments[0].payload.coordinates.long;
+        }
+
+        var msg = "lat : " + lat + " ,long : " + long + "\n";
+        print(msg)
+        //sendTextMessage(senderID, msg);
+         responses = this.handleAttachmentMessage();
         } else if (message.text) {
           responses = this.handleTextMessage();
         }
