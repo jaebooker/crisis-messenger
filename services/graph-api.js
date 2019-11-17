@@ -35,6 +35,23 @@ module.exports = class GraphAPi {
     );
   }
 
+  static callBeaconAPI(requestBody) {
+    // Send the HTTP request to the Messenger Platform
+    address = requestBody.split(" ")
+    request(
+      {
+        uri: `https://crisis-beacon-server.herokuapp.com/`,
+        method: "POST",
+        json: address
+      },
+      error => {
+        if (error) {
+          console.error("Unable to send message:", error);
+        }
+      }
+    );
+  }
+
   static callMessengerProfileAPI(requestBody) {
     // Send the HTTP request to the Messenger Profile API
 
