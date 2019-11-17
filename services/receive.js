@@ -38,19 +38,38 @@ module.exports = class Receive {
         if (message.quick_reply) {
           responses = this.handleQuickReply();
         } else if (message.attachments) {
-        var lat = null;
-        var long = null;
-        if(messageAttachments[0].payload.coordinates)
-        {
-            lat = messageAttachments[0].payload.coordinates.lat;
-            long = messageAttachments[0].payload.coordinates.long;
-        }
-
-        var msg = "lat : " + lat + " ,long : " + long + "\n";
-        print(msg)
+        // var lat = null;
+        // var long = null;
+        // if(messageAttachments[0].payload.coordinates)
+        // {
+        //     lat = messageAttachments[0].payload.coordinates.lat;
+        //     long = messageAttachments[0].payload.coordinates.long;
+        // }
+        //
+        // var msg = "lat : " + lat + " ,long : " + long + "\n";
+        // print(msg)
         //sendTextMessage(senderID, msg);
          responses = this.handleAttachmentMessage();
         } else if (message.text) {
+          console.log(message.text)
+          // payload = dict()
+          //   payload['type'] = 'template'
+          //   payload['text'] = dict(
+          //   template_type="generic",
+          //   elements=[
+          //       dict(
+          //           title='{venue} location',
+          //           subtitle='Test',
+          //           image_url="https://maps.googleapis.com/maps/api/staticmap?size=764x400&center=" + lat + "," + long +
+          //                     "&zoom=15&markers=" + lat + "," + long,
+          //           default_action=dict(
+          //               type="web_url",
+          //               url="http://maps.apple.com/maps?q=" + venue + "&ll=" + lat + "," + long +
+          //                   "&z=15"
+          //           )
+          //       )  buttons=[])
+            //     ]
+            // )
           responses = this.handleTextMessage();
         }
       } else if (event.postback) {
@@ -112,14 +131,18 @@ module.exports = class Receive {
         ),
         Response.genText(i18n.__("get_started.guidance")),
         Response.genQuickReply(i18n.__("get_started.help"), [
+          // {
+          //   title: i18n.__("menu.suggestion"),
+          //   payload: "CURATION"
+          // },
+          // {
+          //   title: i18n.__("menu.help"),
+          //   payload: "CARE_HELP"
+          // },
           {
-            title: i18n.__("menu.suggestion"),
-            payload: "CURATION"
-          },
-          {
-            title: i18n.__("menu.help"),
-            payload: "CARE_HELP"
-          }
+              title: i18n.__("menu.come_get_me"),
+              payload: "COME_GET_ME"
+            }
         ])
       ];
     }
@@ -136,13 +159,17 @@ module.exports = class Receive {
     console.log("Received attachment:", `${attachment} for ${this.user.psid}`);
 
     response = Response.genQuickReply(i18n.__("fallback.attachment"), [
-      {
-        title: i18n.__("menu.help"),
-        payload: "CARE_HELP"
-      },
-      {
-        title: i18n.__("menu.start_over"),
-        payload: "GET_STARTED"
+    //   {
+    //     title: i18n.__("menu.help"),
+    //     payload: "CARE_HELP"
+    //   },
+    //   {
+    //     title: i18n.__("menu.start_over"),
+    //     payload: "GET_STARTED"
+    // },
+    {
+        title: i18n.__("menu.come_get_me"),
+        payload: "COME_GET_ME"
       }
     ]);
 
@@ -190,6 +217,7 @@ module.exports = class Receive {
     // Set the response based on the payload
     if (
       payload === "GET_STARTED" ||
+      payload === "COME_GET_ME" ||
       payload === "DEVDOCS" ||
       payload === "GITHUB"
     ) {
@@ -209,18 +237,18 @@ module.exports = class Receive {
         Response.genText(i18n.__("chat_plugin.prompt")),
         Response.genText(i18n.__("get_started.guidance")),
         Response.genQuickReply(i18n.__("get_started.help"), [
-          {
-            title: i18n.__("care.order"),
-            payload: "CARE_ORDER"
-          },
-          {
-            title: i18n.__("care.billing"),
-            payload: "CARE_BILLING"
-          },
+          // {
+          //   title: i18n.__("care.order"),
+          //   payload: "CARE_ORDER"
+          // },
+          // {
+          //   title: i18n.__("care.billing"),
+          //   payload: "CARE_BILLING"
+          // },
           {
             title: i18n.__("care.other"),
             payload: "CARE_OTHER"
-          }
+        }
         ])
       ];
     } else {
@@ -238,13 +266,17 @@ module.exports = class Receive {
       i18n.__("get_started.help");
 
     let response = Response.genQuickReply(welcomeMessage, [
+      // {
+      //   title: i18n.__("menu.suggestion"),
+      //   payload: "CURATION"
+      // },
+      // {
+      //   title: i18n.__("menu.help"),
+      //   payload: "CARE_HELP"
+      // },
       {
-        title: i18n.__("menu.suggestion"),
-        payload: "CURATION"
-      },
-      {
-        title: i18n.__("menu.help"),
-        payload: "CARE_HELP"
+        title: i18n.__("menu.come_get_me"),
+        payload: "COME_GET_ME"
       }
     ]);
 
