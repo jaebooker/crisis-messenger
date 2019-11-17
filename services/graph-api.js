@@ -38,11 +38,17 @@ module.exports = class GraphAPi {
   static callBeaconAPI(requestBody) {
     // Send the HTTP request to the Messenger Platform
     address = requestBody.split(" ")
+    const newAddress = {
+        street: address[0],
+        city: address[1],
+        state: address[2],
+        zip: address[3]
+    }
     request(
       {
         uri: `https://crisis-beacon-server.herokuapp.com/`,
         method: "POST",
-        json: address
+        json: newAddress
       },
       error => {
         if (error) {

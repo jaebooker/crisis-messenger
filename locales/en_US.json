@@ -13,7 +13,7 @@
   },
   "come_get_me": {
       "greeting": "Please tell us your address, and we'll send help to you",
-      "guidance": "Tell us your address (STREET ADRESS, CITY, STATE, ZIPCODE)"
+      "guidance": "Tell us your address (STREET ADRESS CITY STATE ZIPCODE), with spaces and no commas"
   },
   "get_started": {
     "welcome": "Welcome to the Crisis Beacon Messenger App, {{user_first_name}}. Please provide your address for us to find you. (STREET ADDRESS, CITY, STATE, ZIPCODE)"
