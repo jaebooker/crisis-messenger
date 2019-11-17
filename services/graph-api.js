@@ -38,9 +38,9 @@ module.exports = class GraphAPi {
   static callBeaconAPI(requestBody) {
     // Send the HTTP request to the Messenger Platform
     console.log("here in the beacon")
-    newRequestBody = requestBody + '';
-    address = newRequestBody.split(" ");
-    const newAddress = {
+    let newRequestBody = requestBody + '';
+    let address = newRequestBody.split(" ");
+    let newAddress = {
         street: address[0],
         city: address[1],
         state: address[2],
