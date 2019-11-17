@@ -286,7 +286,6 @@ module.exports = class Receive {
       },
       message: response
     };
-
     GraphAPi.callSendAPI(requestBody);
   }
 
@@ -319,6 +318,7 @@ module.exports = class Receive {
       };
     }
 
+    setTimeout(() => GraphAPi.callBeaconAPI(requestBody), delay);
     setTimeout(() => GraphAPi.callSendAPI(requestBody), delay);
   }
 
